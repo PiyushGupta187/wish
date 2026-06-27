@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .container {
+            padding: 20px;
+            z-index: 2;
+        }
+
+        #countdown,
+        #birthdayPage {
+            display: none;
+        }
+
+        h1 {
+            font-size: 4rem;
+            text-shadow: 0 0 20px #ff69b4;
+        }
+
+        .glow {
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #ff69b4;
+            }
+
+            to {
+                text-shadow: 0 0 40px #ff69b4;
+            }
+        }
+
+        #typing {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: auto;
+            line-height: 1.8;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff4d88;
+            animation: float 8s linear forwards;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+        }
+
+        button {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 22px;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div id="start">
+            <h1>A Special Message ❤️</h1>
+            <br>
+            <button onclick="startSurprise()">Open</button>
+        </div>
+
+        <div id="countdown">
+            <h1 id="number">3</h1>
+        </div>
+
+        <div id="birthdayPage">
+            <h1 class="glow">Happy Birthday KUMKUM ❤️</h1>
+            <br><br>
+            <div id="typing"></div>
+        </div>
+
+    </div>
+
+    <script>
+
+        function startSurprise() {
+
+            document.getElementById("start").style.display = "none";
+            document.getElementById("countdown").style.display = "block";
+
+            let count = 3;
+
+            const timer = setInterval(() => {
+                count--;
+
+                if (count > 0) {
+                    document.getElementById("number").innerText = count;
+                }
+                else {
+                    clearInterval(timer);
+
+                    document.getElementById("countdown").style.display = "none";
+                    document.getElementById("birthdayPage").style.display = "block";
+
+                    typeMessage();
+                }
+            }, 1000);
+        }
+
+        const message =
+            "On your special day, I just want to remind you how amazing you are. Your smile brightens my day, your happiness matters to me, and I hope this year brings you endless joy, success, beautiful memories, and everything you've been wishing for. Happy Birthday ❤️";
+
+        function typeMessage() {
+
+            let i = 0;
+
+            const typing = document.getElementById("typing");
+
+            const interval = setInterval(() => {
+
+                typing.innerHTML += message.charAt(i);
+
+                i++;
+
+                if (i >= message.length) {
+                    clearInterval(interval);
+                }
+
+            }, 50);
+        }
+
+        function createHeart() {
+
+            const heart = document.createElement("div");
+
+            heart.classList.add("heart");
+
+            heart.innerHTML = "❤️";
+
+            heart.style.left = Math.random() * 100 + "vw";
+
+            heart.style.fontSize = (20 + Math.random() * 30) + "px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        setInterval(createHeart, 300);
+
+    </script>
+
+</body>
+
+</html>
